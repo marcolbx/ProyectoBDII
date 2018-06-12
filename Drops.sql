@@ -1,3 +1,15 @@
+drop table Ord_Tra;
+drop table Transaccion;
+drop table Precio;
+drop table Mer_Mon;
+drop table Evento;
+drop table Moneda;
+drop table Mercado;
+drop table Orden_Market;
+drop table Orden_Limit;
+drop table Billetera;
+drop table Usuario;
+drop table Direccion;
 drop type Numero_de_Cuenta;
 drop type Descripcion;
 drop type Detalle;
@@ -8,15 +20,5 @@ drop type Pasaporte;
 drop type Fundadores;
 drop type Tarjeta;
 drop type Pago_Tarjeta;
-drop table Direccion;
-drop table Usuario;
-drop table Billetera;
-drop table Orden_Limit;
-drop table Orden_Market;
-drop table Mer_Mon;
-drop table Mercado;
-drop table Moneda;
-drop table Evento;
-drop table Precio;
-drop table Transaccion;
-drop table Ord_Tra;
+
+
