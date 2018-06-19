@@ -7,5 +7,9 @@ Select * from Moneda;
 Select * from Usuario;
 Select * from Orden_Limit;
 Select * from Orden_Market;
+Select * from Precio;
+Select * from Transaccion;
 INSERT INTO Moneda(mon_descripcion,mon_valor) values (Descripcion('Ethereum','Creada por Satoshi',SYSDATE),'17');
 INSERT INTO Moneda(mon_descripcion,mon_valor) values (Descripcion('Ripple','Creada por Satoshi',SYSDATE),'1');
+INSERT INTO Transaccion(tra_detalle,tra_numeros_de_cuenta,fk_mon_ofrecida_codigo,fk_mon_solicitada_codigo)
+values(Detalle(4,SYSDATE,1000),Numero_De_Cuenta('xxx','tus cochinadas'),3,4);
