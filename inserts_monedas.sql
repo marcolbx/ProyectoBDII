@@ -7,7 +7,23 @@ INSERT INTO Moneda(mon_descripcion, mon_valor, mon_pais_origen, mon_fundadores) 
 INSERT INTO Moneda(mon_descripcion, mon_valor, mon_pais_origen, mon_fundadores) values (
 	Descripcion('Ripple','Creada por Arthur Britto','15/05/18'),'0.482422', Pais('N/A','p0'), Fundadores('Arthur Britto','David Schwartz'));
 INSERT INTO Moneda(mon_descripcion, mon_valor, mon_pais_origen, mon_fundadores) values (
-	Descripcion('DeepOnion','Creada por Arthur Britto','15/05/18'),'0.733339', Pais('N/A','p0'), Fundadores('Arthur Britto','David Schwartz'));
+	Descripcion('Dash','Creada por Evan Duffield','18/01/14'),'240.95', Pais('N/A','p0'), Fundadores('Evan Duffield',''));
+INSERT INTO Moneda(mon_descripcion, mon_valor, mon_pais_origen, mon_fundadores) values (
+	Descripcion('Dogecoin','Creada por Billy Markus','06/12/13'),'0.002558', Pais('N/A','p0'), Fundadores('Billy Markus','Jackson Palmer'));
+INSERT INTO Moneda(mon_descripcion, mon_valor, mon_pais_origen, mon_fundadores) values (
+	Descripcion('Peercoin','Creada por Scott Nadal','12/08/12'),'1.48', Pais('N/A','p0'), Fundadores('Scott Nadal','Sunny King'));
+INSERT INTO Moneda(mon_descripcion, mon_valor, mon_pais_origen, mon_fundadores) values (
+	Descripcion('Namecoin','Creada por Vinced','18/04/11'),'1.34', Pais('N/A','p0'), Fundadores('Vincent Durham',''));
+INSERT INTO Moneda(mon_descripcion, mon_valor, mon_pais_origen, mon_fundadores) values (
+	Descripcion('Primecoin','Creada por Rhett Creighton','07/07/13'),'1.24', Pais('N/A','p0'), Fundadores('Rhett Creighton',''));
+INSERT INTO Moneda(mon_descripcion, mon_valor, mon_pais_origen, mon_fundadores) values (
+	Descripcion('Lisk','Creada por Max Kordek','24/05/16'),'5.56', Pais('N/A','p0'), Fundadores('Max Kordek',''));
+INSERT INTO Moneda(mon_descripcion, mon_valor, mon_pais_origen, mon_fundadores) values (
+	Descripcion('Solarcoin','Creada por Fondation SolarCoin','12/01/14'),'0.188945', Pais('N/A','p0'), Fundadores('Fondation SolarCoin',''));
+INSERT INTO Moneda(mon_descripcion, mon_valor, mon_pais_origen, mon_fundadores) values (
+	Descripcion('Stellar','Creada por Jed McCaleb','31/07/14'),'0.198462', Pais('N/A','p0'), Fundadores('Jed McCaleb','Joyce Kim'));
+INSERT INTO Moneda(mon_descripcion, mon_valor, mon_pais_origen, mon_fundadores) values (
+	Descripcion('Zcash','Creada por Zooko Wilcox-OHearn','28/09/16'),'166.74', Pais('N/A','p0'), Fundadores('Matthew D. Green','Zooko Wilcox-OHearn'));
 
 
 INSERT INTO Mercado(mer_capacidad, mer_descripcion) values (
