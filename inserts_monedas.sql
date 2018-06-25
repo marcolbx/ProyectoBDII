@@ -34,4 +34,43 @@ INSERT INTO Mercado(mer_capacidad, mer_descripcion) values (
 	'100000', Descripcion('LiteCoin','mercado de LiteCoin', '07/09/11'));
 
 INSERT INTO Mer_Mon(mer_mon_principal, fk_mer_codigo, fk_mon_codigo) values ('si', SELECT mer_codigo FROM Mercado WHERE mer_nombre = 'Bitcoin', SELECT mon_codigo FROM Moneda WHERE mon_nombre = 'Bitcoin');
+INSERT INTO Mer_Mon(mer_mon_principal, fk_mer_codigo, fk_mon_codigo) values ('no', SELECT mer_codigo FROM Mercado WHERE mer_nombre = 'Bitcoin', SELECT mon_codigo FROM Moneda WHERE mon_nombre = 'Ethereum');
+INSERT INTO Mer_Mon(mer_mon_principal, fk_mer_codigo, fk_mon_codigo) values ('no', SELECT mer_codigo FROM Mercado WHERE mer_nombre = 'Bitcoin', SELECT mon_codigo FROM Moneda WHERE mon_nombre = 'LiteCoin');
+INSERT INTO Mer_Mon(mer_mon_principal, fk_mer_codigo, fk_mon_codigo) values ('no', SELECT mer_codigo FROM Mercado WHERE mer_nombre = 'Bitcoin', SELECT mon_codigo FROM Moneda WHERE mon_nombre = 'Ripple');
+INSERT INTO Mer_Mon(mer_mon_principal, fk_mer_codigo, fk_mon_codigo) values ('no', SELECT mer_codigo FROM Mercado WHERE mer_nombre = 'Bitcoin', SELECT mon_codigo FROM Moneda WHERE mon_nombre = 'Dash');
+INSERT INTO Mer_Mon(mer_mon_principal, fk_mer_codigo, fk_mon_codigo) values ('no', SELECT mer_codigo FROM Mercado WHERE mer_nombre = 'Bitcoin', SELECT mon_codigo FROM Moneda WHERE mon_nombre = 'Dogecoin');
+INSERT INTO Mer_Mon(mer_mon_principal, fk_mer_codigo, fk_mon_codigo) values ('no', SELECT mer_codigo FROM Mercado WHERE mer_nombre = 'Bitcoin', SELECT mon_codigo FROM Moneda WHERE mon_nombre = 'Peercoin');
+INSERT INTO Mer_Mon(mer_mon_principal, fk_mer_codigo, fk_mon_codigo) values ('no', SELECT mer_codigo FROM Mercado WHERE mer_nombre = 'Bitcoin', SELECT mon_codigo FROM Moneda WHERE mon_nombre = 'Namecoin');
+INSERT INTO Mer_Mon(mer_mon_principal, fk_mer_codigo, fk_mon_codigo) values ('no', SELECT mer_codigo FROM Mercado WHERE mer_nombre = 'Bitcoin', SELECT mon_codigo FROM Moneda WHERE mon_nombre = 'PrimeCoin');
+INSERT INTO Mer_Mon(mer_mon_principal, fk_mer_codigo, fk_mon_codigo) values ('no', SELECT mer_codigo FROM Mercado WHERE mer_nombre = 'Bitcoin', SELECT mon_codigo FROM Moneda WHERE mon_nombre = 'Lisk');
+INSERT INTO Mer_Mon(mer_mon_principal, fk_mer_codigo, fk_mon_codigo) values ('no', SELECT mer_codigo FROM Mercado WHERE mer_nombre = 'Bitcoin', SELECT mon_codigo FROM Moneda WHERE mon_nombre = 'Solarcoin');
+INSERT INTO Mer_Mon(mer_mon_principal, fk_mer_codigo, fk_mon_codigo) values ('no', SELECT mer_codigo FROM Mercado WHERE mer_nombre = 'Bitcoin', SELECT mon_codigo FROM Moneda WHERE mon_nombre = 'Stellar');
+INSERT INTO Mer_Mon(mer_mon_principal, fk_mer_codigo, fk_mon_codigo) values ('no', SELECT mer_codigo FROM Mercado WHERE mer_nombre = 'Bitcoin', SELECT mon_codigo FROM Moneda WHERE mon_nombre = 'Zcash');
 
+INSERT INTO Mer_Mon(mer_mon_principal, fk_mer_codigo, fk_mon_codigo) values ('no', SELECT mer_codigo FROM Mercado WHERE mer_nombre = 'Ethereum', SELECT mon_codigo FROM Moneda WHERE mon_nombre = 'Bitcoin');
+INSERT INTO Mer_Mon(mer_mon_principal, fk_mer_codigo, fk_mon_codigo) values ('si', SELECT mer_codigo FROM Mercado WHERE mer_nombre = 'Ethereum', SELECT mon_codigo FROM Moneda WHERE mon_nombre = 'Ethereum');
+INSERT INTO Mer_Mon(mer_mon_principal, fk_mer_codigo, fk_mon_codigo) values ('no', SELECT mer_codigo FROM Mercado WHERE mer_nombre = 'Ethereum', SELECT mon_codigo FROM Moneda WHERE mon_nombre = 'LiteCoin');
+INSERT INTO Mer_Mon(mer_mon_principal, fk_mer_codigo, fk_mon_codigo) values ('no', SELECT mer_codigo FROM Mercado WHERE mer_nombre = 'Ethereum', SELECT mon_codigo FROM Moneda WHERE mon_nombre = 'Ripple');
+INSERT INTO Mer_Mon(mer_mon_principal, fk_mer_codigo, fk_mon_codigo) values ('no', SELECT mer_codigo FROM Mercado WHERE mer_nombre = 'Ethereum', SELECT mon_codigo FROM Moneda WHERE mon_nombre = 'Dash');
+INSERT INTO Mer_Mon(mer_mon_principal, fk_mer_codigo, fk_mon_codigo) values ('no', SELECT mer_codigo FROM Mercado WHERE mer_nombre = 'Ethereum', SELECT mon_codigo FROM Moneda WHERE mon_nombre = 'Dogecoin');
+INSERT INTO Mer_Mon(mer_mon_principal, fk_mer_codigo, fk_mon_codigo) values ('no', SELECT mer_codigo FROM Mercado WHERE mer_nombre = 'Ethereum', SELECT mon_codigo FROM Moneda WHERE mon_nombre = 'Peercoin');
+INSERT INTO Mer_Mon(mer_mon_principal, fk_mer_codigo, fk_mon_codigo) values ('no', SELECT mer_codigo FROM Mercado WHERE mer_nombre = 'Ethereum', SELECT mon_codigo FROM Moneda WHERE mon_nombre = 'Namecoin');
+INSERT INTO Mer_Mon(mer_mon_principal, fk_mer_codigo, fk_mon_codigo) values ('no', SELECT mer_codigo FROM Mercado WHERE mer_nombre = 'Ethereum', SELECT mon_codigo FROM Moneda WHERE mon_nombre = 'PrimeCoin');
+INSERT INTO Mer_Mon(mer_mon_principal, fk_mer_codigo, fk_mon_codigo) values ('no', SELECT mer_codigo FROM Mercado WHERE mer_nombre = 'Ethereum', SELECT mon_codigo FROM Moneda WHERE mon_nombre = 'Lisk');
+INSERT INTO Mer_Mon(mer_mon_principal, fk_mer_codigo, fk_mon_codigo) values ('no', SELECT mer_codigo FROM Mercado WHERE mer_nombre = 'Ethereum', SELECT mon_codigo FROM Moneda WHERE mon_nombre = 'Solarcoin');
+INSERT INTO Mer_Mon(mer_mon_principal, fk_mer_codigo, fk_mon_codigo) values ('no', SELECT mer_codigo FROM Mercado WHERE mer_nombre = 'Ethereum', SELECT mon_codigo FROM Moneda WHERE mon_nombre = 'Stellar');
+INSERT INTO Mer_Mon(mer_mon_principal, fk_mer_codigo, fk_mon_codigo) values ('no', SELECT mer_codigo FROM Mercado WHERE mer_nombre = 'Ethereum', SELECT mon_codigo FROM Moneda WHERE mon_nombre = 'Zcash');
+
+INSERT INTO Mer_Mon(mer_mon_principal, fk_mer_codigo, fk_mon_codigo) values ('no', SELECT mer_codigo FROM Mercado WHERE mer_nombre = 'LiteCoin', SELECT mon_codigo FROM Moneda WHERE mon_nombre = 'Bitcoin');
+INSERT INTO Mer_Mon(mer_mon_principal, fk_mer_codigo, fk_mon_codigo) values ('no', SELECT mer_codigo FROM Mercado WHERE mer_nombre = 'LiteCoin', SELECT mon_codigo FROM Moneda WHERE mon_nombre = 'Ethereum');
+INSERT INTO Mer_Mon(mer_mon_principal, fk_mer_codigo, fk_mon_codigo) values ('si', SELECT mer_codigo FROM Mercado WHERE mer_nombre = 'LiteCoin', SELECT mon_codigo FROM Moneda WHERE mon_nombre = 'LiteCoin');
+INSERT INTO Mer_Mon(mer_mon_principal, fk_mer_codigo, fk_mon_codigo) values ('no', SELECT mer_codigo FROM Mercado WHERE mer_nombre = 'LiteCoin', SELECT mon_codigo FROM Moneda WHERE mon_nombre = 'Ripple');
+INSERT INTO Mer_Mon(mer_mon_principal, fk_mer_codigo, fk_mon_codigo) values ('no', SELECT mer_codigo FROM Mercado WHERE mer_nombre = 'Litecoin', SELECT mon_codigo FROM Moneda WHERE mon_nombre = 'Dash');
+INSERT INTO Mer_Mon(mer_mon_principal, fk_mer_codigo, fk_mon_codigo) values ('no', SELECT mer_codigo FROM Mercado WHERE mer_nombre = 'Litecoin', SELECT mon_codigo FROM Moneda WHERE mon_nombre = 'Dogecoin');
+INSERT INTO Mer_Mon(mer_mon_principal, fk_mer_codigo, fk_mon_codigo) values ('no', SELECT mer_codigo FROM Mercado WHERE mer_nombre = 'Litecoin', SELECT mon_codigo FROM Moneda WHERE mon_nombre = 'Peercoin');
+INSERT INTO Mer_Mon(mer_mon_principal, fk_mer_codigo, fk_mon_codigo) values ('no', SELECT mer_codigo FROM Mercado WHERE mer_nombre = 'Litecoin', SELECT mon_codigo FROM Moneda WHERE mon_nombre = 'Namecoin');
+INSERT INTO Mer_Mon(mer_mon_principal, fk_mer_codigo, fk_mon_codigo) values ('no', SELECT mer_codigo FROM Mercado WHERE mer_nombre = 'Litecoin', SELECT mon_codigo FROM Moneda WHERE mon_nombre = 'PrimeCoin');
+INSERT INTO Mer_Mon(mer_mon_principal, fk_mer_codigo, fk_mon_codigo) values ('no', SELECT mer_codigo FROM Mercado WHERE mer_nombre = 'Litecoin', SELECT mon_codigo FROM Moneda WHERE mon_nombre = 'Lisk');
+INSERT INTO Mer_Mon(mer_mon_principal, fk_mer_codigo, fk_mon_codigo) values ('no', SELECT mer_codigo FROM Mercado WHERE mer_nombre = 'Litecoin', SELECT mon_codigo FROM Moneda WHERE mon_nombre = 'Solarcoin');
+INSERT INTO Mer_Mon(mer_mon_principal, fk_mer_codigo, fk_mon_codigo) values ('no', SELECT mer_codigo FROM Mercado WHERE mer_nombre = 'Litecoin', SELECT mon_codigo FROM Moneda WHERE mon_nombre = 'Stellar');
+INSERT INTO Mer_Mon(mer_mon_principal, fk_mer_codigo, fk_mon_codigo) values ('no', SELECT mer_codigo FROM Mercado WHERE mer_nombre = 'Litecoin', SELECT mon_codigo FROM Moneda WHERE mon_nombre = 'Zcash');
