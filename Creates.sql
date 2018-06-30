@@ -11,7 +11,7 @@ fecha_incorporacion date
 );
 /
 create or replace type Detalle as object(
-cantidad int,
+cantidad float,
 fecha_realizacion date,
 tasa_de_canje float
 );
