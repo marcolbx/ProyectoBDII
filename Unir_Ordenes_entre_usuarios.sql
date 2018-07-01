@@ -16,6 +16,7 @@ restantes float;
            Insert into Ord_Tra(fk_tra_codigo,fk_ord_lim_codigo,fk_ord_mar_codigo) values ((Select tra_codigo from(select tra_codigo from Transaccion order by tra_codigo desc) where rownum =1 ),null,:new.ord_mar_codigo); --Agarro la ultima transaccion(es decir, la de arriba)
            Insert into Transaccion(tra_detalle,fk_mon_ofrecida_codigo,fk_mon_solicitada_codigo,tra_numeros_de_cuenta) values(Detalle(restantes,SYSDATE,i.ord_mar_tasa),i.fk_mon_solicitada,i.fk_mon_ofrecida,Numero_de_cuenta('','')); --Ponerle bien los paramentros
            Insert into Ord_Tra(fk_tra_codigo,fk_ord_lim_codigo,fk_ord_mar_codigo) values ((Select tra_codigo from(select tra_codigo from Transaccion order by tra_codigo desc) where rownum =1 ),null,i.ord_mar_codigo); --Agarro la ultima transaccion(es decir, la de arriba)
+           Update Billetera set bil_cantidad = (bil_cantidad + restantes*i.ord_mar_tasa) where (fk_mon_codigo = i.fk_mon_ofrecida) AND (fk_usu_codigo = :new.fk_usu_codigo);          
            Update Billetera set bil_cantidad = (bil_cantidad + restantes) where (fk_mon_codigo = i.fk_mon_solicitada) AND (fk_usu_codigo = i.usu_codigo);          
         
            restantes:= 0;
@@ -26,14 +27,15 @@ restantes float;
             Insert into Ord_Tra(fk_tra_codigo,fk_ord_lim_codigo,fk_ord_mar_codigo) values ((Select tra_codigo from(select tra_codigo from Transaccion order by tra_codigo desc) where rownum =1 ),null,:new.ord_mar_codigo); --Agarro la ultima transaccion(es decir, la de arriba)
             Insert into Transaccion(tra_detalle,fk_mon_ofrecida_codigo,fk_mon_solicitada_codigo,tra_numeros_de_cuenta) values(Detalle(i.ord_mar_restantes,SYSDATE,i.ord_mar_tasa),i.fk_mon_solicitada,i.fk_mon_ofrecida,Numero_de_cuenta('','')); --Ponerle bien los paramentros
             Insert into Ord_Tra(fk_tra_codigo,fk_ord_lim_codigo,fk_ord_mar_codigo) values ((Select tra_codigo from(select tra_codigo from Transaccion order by tra_codigo desc) where rownum =1 ),null,i.ord_mar_codigo); --Agarro la ultima transaccion(es decir, la de arriba)
-            Update Billetera set bil_cantidad = (bil_cantidad + i.ord_mar_restantes) where (fk_mon_codigo = i.fk_mon_solicitada) AND (fk_usu_codigo = i.usu_codigo);          
-            restantes:= restantes - i.ord_mar_restantes*i.ord_mar_tasa;
+            Update Billetera set bil_cantidad = (bil_cantidad + i.ord_mar_restantes) where (fk_mon_codigo = i.fk_mon_ofrecida) AND (fk_usu_codigo = :new.fk_usu_codigo);          
+            Update Billetera set bil_cantidad = (bil_cantidad + i.ord_mar_restantes*i.ord_mar_tasa) where (fk_mon_codigo = i.fk_mon_solicitada) AND (fk_usu_codigo = i.usu_codigo);  restantes:= restantes - i.ord_mar_restantes*i.ord_mar_tasa;
             update ordenes_temp set ord_mar_restantes = 0 where ord_mar_codigo = i.ord_mar_codigo;
           elsif (restantes < i.ord_mar_restantes*i.ord_mar_tasa and restantes>0) then
            Insert into Transaccion(tra_detalle,fk_mon_ofrecida_codigo,fk_mon_solicitada_codigo,tra_numeros_de_cuenta) values(Detalle(restantes,SYSDATE,:NEW.ord_mar_precio_actual),i.fk_mon_ofrecida,i.fk_mon_solicitada,Numero_de_cuenta('','')); --Ponerle bien los paramentros
            Insert into Ord_Tra(fk_tra_codigo,fk_ord_lim_codigo,fk_ord_mar_codigo) values ((Select tra_codigo from(select tra_codigo from Transaccion order by tra_codigo desc) where rownum =1 ),null,:new.ord_mar_codigo); --Agarro la ultima transaccion(es decir, la de arriba)
            Insert into Transaccion(tra_detalle,fk_mon_ofrecida_codigo,fk_mon_solicitada_codigo,tra_numeros_de_cuenta) values(Detalle(restantes,SYSDATE,i.ord_mar_tasa),i.fk_mon_solicitada,i.fk_mon_ofrecida,Numero_de_cuenta('','')); --Ponerle bien los paramentros
            Insert into Ord_Tra(fk_tra_codigo,fk_ord_lim_codigo,fk_ord_mar_codigo) values ((Select tra_codigo from(select tra_codigo from Transaccion order by tra_codigo desc) where rownum =1 ),null,i.ord_mar_codigo); --Agarro la ultima transaccion(es decir, la de arriba)
+           Update Billetera set bil_cantidad = (bil_cantidad + restantes*i.ord_mar_tasa) where (fk_mon_codigo = i.fk_mon_ofrecida) AND (fk_usu_codigo = :new.fk_usu_codigo);          
            Update Billetera set bil_cantidad = (bil_cantidad + restantes) where (fk_mon_codigo = i.fk_mon_solicitada) AND (fk_usu_codigo = i.usu_codigo);          
         
             update ordenes_temp set ord_mar_restantes = ord_mar_restantes - restantes*ord_mar_tasa where ord_mar_codigo = i.ord_mar_codigo;
@@ -47,7 +49,8 @@ restantes float;
 END;
 
 select * from orden_market;
-insert into orden_market(ord_mar_detalle,ord_mar_fecha_inicio,ord_mar_monedas_por_cambiar, fk_usu_codigo, fk_mon_ofrecida_codigo, fk_mon_solicitada_codigo, ord_mar_precio_actual) values (Detalle(9,sysdate,9),sysdate,9,9,2,1,9);
+insert into orden_market(ord_mar_detalle,ord_mar_fecha_inicio,ord_mar_monedas_por_cambiar, fk_usu_codigo, fk_mon_ofrecida_codigo, fk_mon_solicitada_codigo, ord_mar_precio_actual) values (Detalle(9,sysdate,1),sysdate,9,13,1,3,1);
+insert into orden_market(ord_mar_detalle,ord_mar_fecha_inicio,ord_mar_monedas_por_cambiar, fk_usu_codigo, fk_mon_ofrecida_codigo, fk_mon_solicitada_codigo, ord_mar_precio_actual) values (Detalle(9,sysdate,1),sysdate,9,11,3,1,1);
   
       --Usar update para las billeteras
       --1) Primero hay q ver quienes tienen la misma tasa de canje.. uno tendra tasa de canje n y el otro 1/n 
