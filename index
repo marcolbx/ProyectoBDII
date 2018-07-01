@@ -4,5 +4,6 @@ CREATE INDEX moneda_ofre_orlim ON Orden_Limit (fk_mon_ofrecida_codigo);
 CREATE INDEX moneda_sol_orlim ON Orden_Limit (fk_mon_solicitada_codigo);
 CREATE INDEX moneda_ofre_ormar ON Orden_Market (fk_mon_ofrecida_codigo);
 CREATE INDEX moneda_sol_ormar ON Orden_Market (fk_mon_solicitada_codigo);
+CREATE INDEX moneda_ofre_temp ON Ordenes_temp (fk_mon_ofrecida,fk_mon_solicitada);
 CREATE INDEX moneda_ofre_pre ON Precio (fk_mon_ofrecida_codigo);
 CREATE INDEX moneda_sol_pre ON Precio (fk_mon_solicitada_codigo);
