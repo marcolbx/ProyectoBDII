@@ -17,10 +17,10 @@ CREATE or replace PROCEDURE P_Generacion_Solicitudes(num_solicitudes IN number,m
       mon_cantidad := dbms_random.value(0,10);
       select count (*) into cantidad_usuarios from Usuario where (usu_codigo = usuario);
       if cantidad_usuarios = 1 then
-         tipo_orden := dbms_random.value(1,2);
+         tipo_orden := dbms_random.value(1,1);
          if(tipo_orden = 1) then
-            select pre_monto into cambio from precio where rownum=1 order by pre_fecha;
-            insert into Orden_Market(ord_mar_detalle,ord_mar_fecha_inicio,ord_mar_precio_actual,fk_usu_codigo,fk_mon_ofrecida_codigo, fk_mon_solicitada_codigo) values (Detalle(mon_cantidad,SYSDATE,cambio),SYSDATE,cambio,usuario,mon_solicitadas,mon_ofrecidas);
+            select pre_monto into cambio from precio where rownum=1 and fk_mon_ofrecida_codigo = mon_ofrecidas and fk_mon_solicitada_codigo = mon_solicitadas order by pre_fecha;
+            insert into Orden_Market(ord_mar_detalle,ord_mar_fecha_inicio,ord_mar_precio_actual,fk_usu_codigo,fk_mon_ofrecida_codigo, fk_mon_solicitada_codigo,ord_mar_monedas_por_cambiar) values (Detalle(mon_cantidad,SYSDATE,cambio),SYSDATE,cambio,usuario,mon_solicitadas,mon_ofrecidas,mon_cantidad);
             i:=i+1;
          else
             cambio:= dbms_random.value(precio_min,precio_max);
@@ -32,5 +32,5 @@ CREATE or replace PROCEDURE P_Generacion_Solicitudes(num_solicitudes IN number,m
     end loop;
 End;
 
-call P_Generacion_Solicitudes(100,1,2,0.1,2);
+call P_Generacion_Solicitudes(100,1,7,0.1,2);
  
