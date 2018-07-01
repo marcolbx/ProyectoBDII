@@ -19,7 +19,7 @@ WHEN OTHERS THEN
    raise_application_error(-20001,'An error was encountered - '||SQLCODE||' -ERROR- '||SQLERRM);
 end Functionvol;
 
-SELECT Functionvol('1/Jan/2018','1/Oct/2018',0,2,71) FROM Transaccion;
+SELECT Functionvol('1/Jan/2018','1/Oct/2018',0,1,1) FROM Transaccion;
 
 create or replace Function  --Funcion que me dara la descripcion de la moneda
   Functionmon(monedax IN number)
@@ -55,29 +55,9 @@ create or replace procedure Reporte_Volumen_Moneda(fecha_ini IN date, fecha_fin 
          end loop;
          dbms_output.put_line('_____________________________________________________________________________________________');
 end;
-call Reporte_Volumen_Moneda('01/Jan/2018','01/Oct/2018',0,2,71);
+call Reporte_Volumen_Moneda('01/Jan/2018','01/Oct/2018',0,10000,1);
 
-/*
-CREATE OR REPLACE PROCEDURE Procedure_vol(monedax IN number)
-AS
-BEGIN
-   FOR i in (SELECT * 
-         FROM Transaccion
-         where fk_mon_ofrecida_codigo = monedax) loop
-         dbms_output.put_line('Transaccion T' || i.tra_codigo || ' Cantidad ' || i.tra_detalle.cantidad || ' Fecha Realizacion: ' || i.tra_detalle.fecha_realizacion);
-         end loop;
-END;
-call Procedure_vol(71);
-/*
-for i in ( select * from
-      (select t.tra_detalle.cantidad,t.tra_detalle.fecha_realizacion,t.tra_detalle.tasa_de_canje,t.fk_mon_ofrecida_codigo
-      from Transaccion t
-      where moneda = t.fk_mon_ofrecida_codigo 
-      order by t.tra_detalle.fecha_realizacion desc
-    )
-  where ROWNUM <11) loop 
-  end loop;
-*/
+select * from Transaccion where fk_mon_ofrecida_codigo=1;
 
 
  call Functionvol(SYSDATE,SYSDATE+1,0,2,71); 
