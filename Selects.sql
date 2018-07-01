@@ -1,6 +1,18 @@
 select * from moneda;
+delete from ord_tra;
+delete from transaccion;
+delete from orden_market;
+delete from ordenes_temp;
 select * from orden_market;
 select * from orden_limit;
 select * from usuario;
 select * from precio;
 select o.ord_mar_detalle.cantidad from orden_market o;
+select * from ordenes_temp;
+update billetera set bil_cantidad=0;
+select * from billetera order by bil_cantidad desc;
+select * from usuario;
+select t.tra_codigo, t.tra_detalle.cantidad, t.fk_mon_ofrecida_codigo,t.fk_mon_solicitada_codigo from transaccion t;
+select * from ordenes_temp;
+select * from transaccion;
+select t.tra_detalle.cantidad, o.ord_mar_detalle.cantidad, o.ord_mar_codigo from transaccion t, ord_tra ot, orden_market o where t.tra_codigo = ot.fk_tra_codigo and o.ord_mar_codigo = ot.fk_ord_mar_codigo order by o.ord_mar_codigo;
