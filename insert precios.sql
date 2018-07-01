@@ -4,7 +4,7 @@ INSERT INTO Precio(pre_fecha, pre_monto, fk_mon_ofrecida_codigo, fk_mon_solicita
 	(SELECT mon_codigo FROM Moneda m WHERE m.mon_descripcion.nombre = 'Ethereum'));
 INSERT INTO Precio(pre_fecha, pre_monto, fk_mon_ofrecida_codigo, fk_mon_solicitada_codigo) values (
 	SYSDATE, 79.602909, (SELECT mon_codigo FROM Moneda m WHERE m.mon_descripcion.nombre = 'Bitcoin'), 
-	(SELECT mon_codigo FROM Moneda m WHERE m.mon_descripcion.nombre = 'LiteCoin'));
+	(SELECT mon_codigo FROM Moneda m WHERE m.mon_descripcion.nombre = 'Litecoin'));
 INSERT INTO Precio(pre_fecha, pre_monto, fk_mon_ofrecida_codigo, fk_mon_solicitada_codigo) values (
 	SYSDATE, 13840.623077, (SELECT mon_codigo FROM Moneda m WHERE m.mon_descripcion.nombre = 'Bitcoin'), 
 	(SELECT mon_codigo FROM Moneda m WHERE m.mon_descripcion.nombre = 'Ripple'));
@@ -74,7 +74,7 @@ INSERT INTO Precio(pre_fecha, pre_monto, fk_mon_ofrecida_codigo, fk_mon_solicita
 	(SELECT mon_codigo FROM Moneda m WHERE m.mon_descripcion.nombre = 'Bitcoin'));
 INSERT INTO Precio(pre_fecha, pre_monto, fk_mon_ofrecida_codigo, fk_mon_solicitada_codigo) values (
 	SYSDATE, 5.608726, (SELECT mon_codigo FROM Moneda m WHERE m.mon_descripcion.nombre = 'Ethereum'), 
-	(SELECT mon_codigo FROM Moneda m WHERE m.mon_descripcion.nombre = 'LiteCoin'));
+	(SELECT mon_codigo FROM Moneda m WHERE m.mon_descripcion.nombre = 'Litecoin'));
 INSERT INTO Precio(pre_fecha, pre_monto, fk_mon_ofrecida_codigo, fk_mon_solicitada_codigo) values (
 	SYSDATE, 975.660795, (SELECT mon_codigo FROM Moneda m WHERE m.mon_descripcion.nombre = 'Ethereum'), 
 	(SELECT mon_codigo FROM Moneda m WHERE m.mon_descripcion.nombre = 'Ripple'));
