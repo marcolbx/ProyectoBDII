@@ -157,3 +157,12 @@ fk_tra_codigo int not null,
 fk_ord_lim_codigo int REFERENCES Orden_Limit(ord_lim_codigo),
 fk_ord_mar_codigo int REFERENCES Orden_Market(ord_mar_codigo)
 );
+
+CREATE INDEX moneda_ofre_tran ON TRANSACCION (fk_mon_ofrecida_codigo);
+CREATE INDEX moneda_sol_tran ON TRANSACCION (fk_mon_solicitada_codigo);
+CREATE INDEX moneda_ofre_orlim ON Orden_Limit (fk_mon_ofrecida_codigo);
+CREATE INDEX moneda_sol_orlim ON Orden_Limit (fk_mon_solicitada_codigo);
+CREATE INDEX moneda_ofre_ormar ON Orden_Market (fk_mon_ofrecida_codigo);
+CREATE INDEX moneda_sol_ormar ON Orden_Market (fk_mon_solicitada_codigo);
+CREATE INDEX moneda_ofre_pre ON Precio (fk_mon_ofrecida_codigo);
+CREATE INDEX moneda_sol_pre ON Precio (fk_mon_solicitada_codigo);

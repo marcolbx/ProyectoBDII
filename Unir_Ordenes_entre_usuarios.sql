@@ -1,7 +1,11 @@
 --Este trigger unira las ordenes de varios usuarios y genera las transacciones para la completacion de la solicitud(tabla q no existe).
 --Es decir, si un usuario pide 10 btc x 1 ethereum, habiendo 2 usuarios q poseen 5 btc, se uniran ambas para satisfacer
+
+--Esta es la tabla necesaria
 drop table ordenes_temp;
 create table ordenes_temp(ord_mar_codigo number, ord_mar_tasa float, fk_mon_ofrecida number, fk_mon_solicitada number, ord_mar_restantes float, ord_mar_cantidad number, usu_codigo number);
+CREATE INDEX moneda_ofre_temp ON Ordenes_temp (fk_mon_ofrecida,fk_mon_solicitada);
+
 CREATE OR REPLACE TRIGGER TR_UNIR_ORDEN
 AFTER INSERT ON ORDEN_MARKET
 For each row
