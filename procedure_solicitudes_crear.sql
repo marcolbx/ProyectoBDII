@@ -39,5 +39,31 @@ CREATE or replace PROCEDURE P_Generacion_Solicitudes(num_solicitudes IN number,m
     end loop;
 End;
 
+CREATE or replace PROCEDURE P_Especular(num_solicitudes IN number,mon_ofrecidas IN number,mon_solicitadas IN number, precio_min IN float, precio_max IN float)
+ IS 
+  usuario pls_integer;
+  mon_cantidad float;
+  cambio float;
+  mon_valor float;
+  cantidad_usuarios number;
+  i pls_integer;
+ BEGIN
+    i:=0;
+    loop 
+      usuario := dbms_random.value(1,30); -- (1, 500.000)
+      select count (*) into cantidad_usuarios from Usuario where (usu_codigo = usuario);
+      if cantidad_usuarios = 1 then
+            cambio:= dbms_random.value(precio_min,precio_max);
+            mon_cantidad := dbms_random.value(0,10);
+            insert into Orden_Market(ord_mar_detalle,ord_mar_fecha_inicio,ord_mar_precio_actual,fk_usu_codigo,fk_mon_ofrecida_codigo, fk_mon_solicitada_codigo,ord_mar_monedas_por_cambiar) values (Detalle(mon_cantidad,SYSDATE,cambio),SYSDATE,cambio,usuario,mon_solicitadas,mon_ofrecidas,mon_cantidad);
+            mon_cantidad := dbms_random.value(0,10);
+            insert into Orden_Market(ord_mar_detalle,ord_mar_fecha_inicio,ord_mar_precio_actual,fk_usu_codigo,fk_mon_ofrecida_codigo, fk_mon_solicitada_codigo,ord_mar_monedas_por_cambiar) values (Detalle(mon_cantidad,SYSDATE,1/cambio),SYSDATE,1/cambio,usuario,mon_ofrecidas,mon_solicitadas,mon_cantidad);
+            i:=i+1;
+      end if;
+      exit when i>=num_solicitudes;
+    end loop;
+End;
+
 call P_Generacion_Solicitudes(10000,1,7,1.00001,1.00002);
+call P_Especular(10000,1,2,1.00001,1.00002);
  
