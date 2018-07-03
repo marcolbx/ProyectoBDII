@@ -1,6 +1,6 @@
-create or replace procedure Procedure_Reporte_monedas_paises(monedax in number,fecha_ini date) 
+create or replace procedure Proc_Reporte_monedas_pais(monedax in number,fecha_ini date) 
 is
-paises varchar(100);
+paises varchar(80);
   begin
   
   For i in (Select d.dir_pais.nombre  as resultado,sum(m.ord_mar_detalle.cantidad) as suma from Direccion d, Usuario u, Orden_Market m
@@ -12,7 +12,7 @@ paises varchar(100);
   dbms_output.put_line(i.resultado || ': ' || i.suma);
   end loop;
   end;
-    call Procedure_Reporte_monedas_paises(1,'01/Jan/2018');
+    call Proc_Reporte_monedas_pais(1,'01/01/2018');
   
   set serveroutput on;
   
