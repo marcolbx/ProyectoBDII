@@ -1,6 +1,6 @@
 --Determinar la cantidad de ordenes de tipo market de una moneda(moneda) en el intercambio de un rango de días (fecha inicio – fecha fin)
 --con un tasa de canje(tasa) mayor a la especificada de usuarios de un país especifico(pais).
-  
+ 
 create or replace Function  --Funcion que devuelve la cantidad de ordenes y me devuelve un int
   Functionvol1 (fecha_ini IN date, fecha_fin IN date,tasa IN float, pais IN varchar,moneda IN number)
   return int 
