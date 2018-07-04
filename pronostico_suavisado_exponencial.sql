@@ -38,8 +38,8 @@ pronostico float;
 anterior float;
 pronostico_anterior float;
 begin
-  alfa := 0.5;
-  mejor_alfa :=0.5;
+  alfa := 0.1;
+  mejor_alfa :=0.1;
   while alfa<1 loop
     msn1 := msn(alfa,num_transacciones,mon_ofrecida,mon_solicitada);
     alfa := alfa+avance;
@@ -58,5 +58,5 @@ begin
   dbms_output.put_line('Con un alfa: '|| mejor_alfa);
   dbms_output.put_line('Y un error cuadrado medio de: '|| msn2); 
 end;
-call suavizado_exponencial(0.05, 100, 2, 1);
+call suavizado_exponencial(0.2, 5, 1, 3);
 select * from pronostico_suavizado;

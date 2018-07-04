@@ -14,7 +14,7 @@ CREATE or replace PROCEDURE P_Generacion_Solicitudes(num_solicitudes IN number,m
  BEGIN
     i:=0;
     loop 
-      usuario := dbms_random.value(1,30); -- (1, 500.000)
+      usuario := dbms_random.value(1,500000); -- (1, 500.000)
       mon_cantidad := dbms_random.value(0,10);
       select count (*) into cantidad_usuarios from Usuario where (usu_codigo = usuario);
       if cantidad_usuarios = 1 then
@@ -50,20 +50,51 @@ CREATE or replace PROCEDURE P_Especular(num_solicitudes IN number,mon_ofrecidas 
  BEGIN
     i:=0;
     loop 
-      usuario := dbms_random.value(1,30); -- (1, 500.000)
-      select count (*) into cantidad_usuarios from Usuario where (usu_codigo = usuario);
-      if cantidad_usuarios = 1 then
+      usuario := dbms_random.value(1,500000); -- (1, 500.000)
             cambio:= dbms_random.value(precio_min,precio_max);
             mon_cantidad := dbms_random.value(0,10);
-            insert into Orden_Market(ord_mar_detalle,ord_mar_fecha_inicio,ord_mar_precio_actual,fk_usu_codigo,fk_mon_ofrecida_codigo, fk_mon_solicitada_codigo,ord_mar_monedas_por_cambiar) values (Detalle(mon_cantidad,SYSDATE,cambio),SYSDATE,cambio,usuario,mon_solicitadas,mon_ofrecidas,mon_cantidad);
-            mon_cantidad := dbms_random.value(0,10);
-            insert into Orden_Market(ord_mar_detalle,ord_mar_fecha_inicio,ord_mar_precio_actual,fk_usu_codigo,fk_mon_ofrecida_codigo, fk_mon_solicitada_codigo,ord_mar_monedas_por_cambiar) values (Detalle(mon_cantidad,SYSDATE,1/cambio),SYSDATE,1/cambio,usuario,mon_ofrecidas,mon_solicitadas,mon_cantidad);
+            insert into Orden_Market(ord_mar_detalle,ord_mar_fecha_inicio,ord_mar_precio_actual,fk_usu_codigo,fk_mon_ofrecida_codigo, fk_mon_solicitada_codigo,ord_mar_monedas_por_cambiar) values (Detalle(mon_cantidad,SYSDATE,cambio),SYSDATE,cambio,usuario,mon_ofrecidas,mon_solicitadas,mon_cantidad);
+            mon_cantidad := mon_cantidad * cambio;
+            usuario := dbms_random.value(1,500000); -- (1, 500.000)
+            insert into Orden_Market(ord_mar_detalle,ord_mar_fecha_inicio,ord_mar_precio_actual,fk_usu_codigo,fk_mon_ofrecida_codigo, fk_mon_solicitada_codigo,ord_mar_monedas_por_cambiar) values (Detalle(mon_cantidad,SYSDATE,1/cambio),SYSDATE,1/cambio,usuario,mon_solicitadas,mon_ofrecidas,mon_cantidad);
             i:=i+1;
-      end if;
       exit when i>=num_solicitudes;
     end loop;
 End;
 
-call P_Generacion_Solicitudes(10000,1,7,1.00001,1.00002);
-call P_Especular(10000,1,2,1.00001,1.00002);
+CREATE or REPLACE PROCEDURE P_evento(moneda in number, nombre in varchar, tipo in number, p_minimo in float, p_maximo in float)
+  IS
+  usuario pls_integer;
+  mon_cantidad float;
+  cambio float;
+  mon_valor float;
+  cantidad_usuarios number;
+  num_solicitudes number;
+  monto float;
+  BEGIN
+    for i in (select * from precio where fk_mon_ofrecida_codigo= moneda) loop
+      num_solicitudes := dbms_random.value(5,10);
+      cambio:= i.pre_monto;
+      monto := i.pre_monto;
+      loop 
+        usuario := dbms_random.value(1,500000);
+          if tipo = 0 then
+              cambio:= cambio - dbms_random.value(monto*p_minimo,monto*p_maximo);
+          else 
+              cambio:= cambio + dbms_random.value(monto*p_minimo,monto*p_maximo);
+          end if;
+          mon_cantidad := dbms_random.value(0.1,10);
+          insert into Orden_Market(ord_mar_detalle,ord_mar_fecha_inicio,ord_mar_precio_actual,fk_usu_codigo,fk_mon_ofrecida_codigo, fk_mon_solicitada_codigo,ord_mar_monedas_por_cambiar) values (Detalle(mon_cantidad,SYSDATE,cambio),SYSDATE,cambio,usuario,i.fk_mon_ofrecida_codigo,i.fk_mon_solicitada_codigo,mon_cantidad);
+          mon_cantidad := mon_cantidad * cambio;
+          usuario := dbms_random.value(1,500000);
+          insert into Orden_Market(ord_mar_detalle,ord_mar_fecha_inicio,ord_mar_precio_actual,fk_usu_codigo,fk_mon_ofrecida_codigo, fk_mon_solicitada_codigo,ord_mar_monedas_por_cambiar) values (Detalle(mon_cantidad,SYSDATE,1/cambio),SYSDATE,1/cambio,usuario,i.fk_mon_solicitada_codigo,i.fk_mon_ofrecida_codigo,mon_cantidad);
+          num_solicitudes := num_solicitudes -1;
+        exit when num_solicitudes <0;
+      end loop;
+    end loop;
+END;
+
+call P_Generacion_Solicitudes(100,1,7,1.00001,1.00002);
+call P_Especular(100,1,5,1.00001,1.00002);
+call P_evento(6,'Descubrieron al pana',0,0.1, 0.2);
  

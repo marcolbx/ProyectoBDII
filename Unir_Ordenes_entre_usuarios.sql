@@ -14,7 +14,7 @@ DECLARE
 restantes float;
   BEGIN                          
       restantes := :NEW.ord_mar_detalle.cantidad;
-      for i in ( select * from Ordenes_temp where fk_mon_ofrecida= :NEW.fk_mon_solicitada_codigo and fk_mon_solicitada = :NEW.fk_mon_ofrecida_codigo and ord_mar_tasa = 1/:NEW.ord_mar_precio_actual) loop
+      for i in ( select * from Ordenes_temp where fk_mon_ofrecida= :NEW.fk_mon_solicitada_codigo and fk_mon_solicitada = :NEW.fk_mon_ofrecida_codigo and ord_mar_tasa < (1/:NEW.ord_mar_precio_actual)+0.000000000000000000000000001 and ord_mar_tasa > (1/:NEW.ord_mar_precio_actual)-0.000000000000000000000000001) loop
          if (restantes = i.ord_mar_restantes*i.ord_mar_tasa and restantes>0) then
            Insert into Transaccion(tra_detalle,fk_mon_ofrecida_codigo,fk_mon_solicitada_codigo,tra_numeros_de_cuenta) values(Detalle(restantes,SYSDATE,:NEW.ord_mar_precio_actual),i.fk_mon_ofrecida,i.fk_mon_solicitada,Numero_de_cuenta('','')); --Ponerle bien los paramentros
            Insert into Ord_Tra(fk_tra_codigo,fk_ord_lim_codigo,fk_ord_mar_codigo) values ((Select tra_codigo from(select tra_codigo from Transaccion order by tra_codigo desc) where rownum =1 ),null,:new.ord_mar_codigo); --Agarro la ultima transaccion(es decir, la de arriba)
@@ -23,7 +23,7 @@ restantes float;
            Update Billetera set bil_cantidad = (bil_cantidad + restantes*i.ord_mar_tasa) where (fk_mon_codigo = i.fk_mon_ofrecida) AND (fk_usu_codigo = :new.fk_usu_codigo);          
            Update Billetera set bil_cantidad = (bil_cantidad + restantes) where (fk_mon_codigo = i.fk_mon_solicitada) AND (fk_usu_codigo = i.usu_codigo);          
         
-           restantes:= 0;
+           restantes := 0;
            update ordenes_temp set ord_mar_restantes = 0 where ord_mar_codigo = i.ord_mar_codigo;
            --Update Orden_Market set ord_mar_monedas_por_cambiar = (i.ord_mar_restantes - i.ord_mar_cantidad) where (i.ord_mar_codigo = ord_mar_codigo);
          elsif(restantes > i.ord_mar_restantes*i.ord_mar_tasa and restantes>0) then
@@ -46,9 +46,10 @@ restantes float;
             restantes:=0;
           end if;
         end loop;
-        EXECUTE IMMEDIATE    --Creo q no se esta llenando Ordenes_temp. http://www.java2s.com/Code/Oracle/PL-SQL/Callexecuteimmediatetodroptablecreatetableandinsertdata.htm
+        if restantes >0 then EXECUTE IMMEDIATE    --Creo q no se esta llenando Ordenes_temp. http://www.java2s.com/Code/Oracle/PL-SQL/Callexecuteimmediatetodroptablecreatetableandinsertdata.htm
           'insert into Ordenes_temp values (:1,:2,:3,:4,:5,:6,:7)'                            --.2                 --.3                         --.4                        --.5
           Using :NEW.ord_mar_codigo,:NEW.ord_mar_detalle.tasa_de_canje,:NEW.fk_mon_ofrecida_codigo,:NEW.fk_mon_solicitada_codigo,restantes,:NEW.ord_mar_detalle.cantidad,:NEW.fk_usu_codigo;
+        end if;
         delete from ordenes_temp where ord_mar_restantes <=0;
 END;
 

@@ -5,7 +5,7 @@ delete from orden_market;
 delete from ordenes_temp;
 select * from orden_market;
 select * from orden_limit;
-select * from usuario;
+select * from usuario where rownum<500;
 select * from precio;
 select o.ord_mar_detalle.cantidad from orden_market o;
 select * from ordenes_temp;
