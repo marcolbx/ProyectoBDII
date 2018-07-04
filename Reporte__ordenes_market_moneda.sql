@@ -1,6 +1,6 @@
 --Determinar la cantidad de ordenes de tipo market de una moneda(moneda) en el intercambio de un rango de días (fecha inicio – fecha fin)
 --con un tasa de canje(tasa) mayor a la especificada de usuarios de un país especifico(pais).
-  
+ 
 create or replace Function  --Funcion que devuelve la cantidad de ordenes y me devuelve un int
   Functionvol1 (fecha_ini IN date, fecha_fin IN date,tasa IN float, pais IN varchar,moneda IN number)
   return int 
@@ -24,7 +24,7 @@ WHEN OTHERS THEN
 end Functionvol1;
 
 create or replace Function  --Funcion que me dara la descripcion de la moneda
-  Functionmon(monedax IN number)
+  Functionmon1(monedax IN number)
   return varchar
   is
   descripcionmon varchar(90);
@@ -34,11 +34,12 @@ create or replace Function  --Funcion que me dara la descripcion de la moneda
    from Moneda m
    where m.mon_codigo = monedax;
    return descripcionmon;
-   end Functionmon;
+   end Functionmon1;
 
 create or replace procedure Reporte_Ordenes_Pais(fecha_ini IN date, fecha_fin IN date,tasa IN float, pais IN varchar,moneda IN number)
   is
   begin
+    dbms_output.put_line('---------------------------------------------------------------------- ');
     dbms_output.put_line(' ');
     dbms_output.put_line('La cantidad de ordenes tipo market es: ' || Functionvol1(fecha_ini,fecha_fin,tasa,pais,moneda));
     dbms_output.put_line('Esta moneda ' || Functionmon(moneda));
